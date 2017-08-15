@@ -128,7 +128,6 @@ $(document).ready(function() {
         setTimeout(function() {
           game.addRandomColor();
         }, 700);
-
       } else { // If the player clicked the wrong element
         setTimeout(function () {
           game.playsound('buzzer.m4a');
@@ -138,7 +137,7 @@ $(document).ready(function() {
         }, 300);
 
         setTimeout(function () {
-          game.activeButton(lastEl);
+          game.playCombination();
         }, 2000);
 
       }
