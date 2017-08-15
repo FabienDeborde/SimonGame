@@ -3,9 +3,13 @@ $(document).ready(function() {
   var game = {
     // Store the state of the game
     playing: false,
+    clickable: true,
 
     // Store the count number
     count : 0,
+
+    // Store player click count
+    playerClick : 0,
 
     // Contains the buttons data
     buttons : {
@@ -87,6 +91,7 @@ $(document).ready(function() {
 
     // Add a new color to combination
     addRandomColor : function() {
+      game.clickable = false;
       // Generate a random color
       var randomColor = game.randomColor();
       console.log(randomColor);
@@ -97,6 +102,7 @@ $(document).ready(function() {
       // Update the count and display it
       game.count += 1;
       game.updateCountText();
+      game.clickable = true;
     },
 
     // Play the combination
@@ -116,18 +122,19 @@ $(document).ready(function() {
   $('.col').on('click', function(){
     var className = this.className;
     className = className.replace('col debug ', '');
-    game.playsound(game.buttons[className].sound);
-
-    if (!game.playing) { // If the game has not started yet
+    if (!game.playing || !game.clickable) { // If the game has not started yet
       return null // do nothing
     } else {
-      // Get the last element color
-      var lastEl = game.combination[game.count - 1];
-      //console.log(lastEl);
-      if (className === lastEl) { // If the player clicked the right element
+      game.playsound(game.buttons[className].sound);
+      // Get the corresponding element color
+      var colorButton = game.combination[game.playerClick];
+      console.log(className, colorButton);
+      //console.log(colorButton);
+      if (className === colorButton) { // If the player clicked the right element
         setTimeout(function() {
           game.addRandomColor();
         }, 700);
+        game.playerClick += 1;
       } else { // If the player clicked the wrong element
         setTimeout(function () {
           game.playsound('buzzer.m4a');
@@ -135,15 +142,11 @@ $(document).ready(function() {
             game.flashButtons( (i * 100) + 300);
           }
         }, 300);
-
         setTimeout(function () {
           game.playCombination();
         }, 2000);
-
       }
-
     }
-
   })
 
   $('.restart-container a').on('click', function(e){
@@ -157,9 +160,9 @@ $(document).ready(function() {
       game.reset();
     }
     game.playing = !game.playing;
-
-
   })
+
+
 
   $('.debug').on('click', function(){
     console.log(game);
