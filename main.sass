@@ -34,6 +34,14 @@ body
       100%
         transform: rotate(360deg)
 
+  .gameover
+    animation: flashingColor 500ms linear infinite
+    @keyframes flashingColor
+      0%
+        color: $red
+      100%
+        color: $dark
+
   .container
     height: 100vh
     padding-top: 50px

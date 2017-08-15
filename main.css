@@ -442,6 +442,21 @@ body {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
+  body .gameover {
+    -webkit-animation: flashingColor 500ms linear infinite;
+    animation: flashingColor 500ms linear infinite; }
+
+@-webkit-keyframes flashingColor {
+  0% {
+    color: #c0392b; }
+  100% {
+    color: #2c3e50; } }
+
+@keyframes flashingColor {
+  0% {
+    color: #c0392b; }
+  100% {
+    color: #2c3e50; } }
   body .container {
     height: 100vh;
     padding-top: 50px;

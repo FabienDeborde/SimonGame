@@ -4,6 +4,7 @@ $(document).ready(function() {
     // Store the state of the game
     playing: false,
     clickable: true,
+    strictMode: false,
 
     // Store the winning condition
     winCount: 20,
@@ -165,19 +166,36 @@ $(document).ready(function() {
           }, 3000)
         }
       } else { // If the player clicked the wrong element
-        // Prevent the player to click during the demo of the combination array
-        game.clickable = false;
-        // Error effect (buzzer sound and color buttons flashing)
-        setTimeout(function () {
-          game.playsound('buzzer.m4a');
-          for (var i = 0; i < 4; i++) {
-            game.flashButtons( (i * 100) + 300);
-          }
-        }, 300);
-        // Show the demo again
-        setTimeout(function () {
-          game.playCombination();
-        }, 2000);
+        if (game.strictMode) {
+          console.log('Game Over');
+          // Game over effect (buzzer sound and color buttons flashing)
+          $('.step-counter').addClass('gameover');
+          setTimeout(function () {
+            game.clickable = false;
+            game.playsound('gameover.mp3');
+            for (var i = 0; i < 8; i++) {
+              game.flashButtons( (i * 100) + 300);
+            }
+          }, 300);
+          setTimeout(function() {
+            $('.step-counter').removeClass('gameover');
+            game.reset();
+          }, 2000)
+        } else {
+          // Prevent the player to click during the demo of the combination array
+          game.clickable = false;
+          // Error effect (buzzer sound and color buttons flashing)
+          setTimeout(function () {
+            game.playsound('buzzer.m4a');
+            for (var i = 0; i < 4; i++) {
+              game.flashButtons( (i * 100) + 300);
+            }
+          }, 300);
+          // Show the demo again
+          setTimeout(function () {
+            game.playCombination();
+          }, 2000);
+        }
       }
     }
   })
@@ -197,6 +215,14 @@ $(document).ready(function() {
     game.playing = !game.playing;
   })
 
+  // Strict Mode checkbox handler
+  $('#switch').on('change', function(){
+    if (this.checked) { // Strict mode checked
+      game.strictMode = true;
+    } else { // Strict mode unchecked
+      game.strictMode = false;
+    }
+  })
 
 
   $('.debug').on('click', function(){
