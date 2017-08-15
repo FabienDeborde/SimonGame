@@ -10,7 +10,7 @@ $(document).ready(function() {
     strictMode: false,
 
     // Store the winning condition
-    winCount: 5,
+    winCount: 20,
 
     // Store the count number
     count : 0,
@@ -118,7 +118,7 @@ $(document).ready(function() {
     // Play the combination
     playCombination : function() {
       // Store an arbitrary delay between each combination color
-      var timeoutValue = 600;
+      var timeoutValue = 400;
       var timeout = timeoutValue;
       // Map through the combination and activate one button at a time
       game.combination.map(function(color){
@@ -155,7 +155,7 @@ $(document).ready(function() {
         if ((game.combination.length) === game.playerClick && game.count !== game.winCount ) { // if it was the last item in combination array
           setTimeout(function() { // generate a new color
             game.addRandomColor();
-          }, 700);
+          }, 600);
         } else if ((game.combination.length) === game.playerClick && game.count === game.winCount ){
           // Winning effect (buzzer sound and color buttons flashing)
           $('.step-container').addClass('rotate');
@@ -200,7 +200,7 @@ $(document).ready(function() {
           // Show the demo again
           setTimeout(function () {
             game.playCombination();
-          }, 2000);
+          }, 1200);
         }
       }
     }
@@ -239,5 +239,4 @@ $(document).ready(function() {
   })
 
   }
-
 })
