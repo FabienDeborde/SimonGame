@@ -26,6 +26,14 @@ body
   .light
     background-color: $light
 
+  .rotate
+    animation: spin 1.5s linear infinite
+    @keyframes spin
+      0%
+        transform: rotate(0deg)
+      100%
+        transform: rotate(360deg)
+
   .container
     height: 100vh
     padding-top: 50px
@@ -121,6 +129,7 @@ body
                     left: 3.5rem - 1.8rem
                     background-color: rgba(231, 76, 60,1.0)
 
+
 @media only screen and (max-width: 575px)
   $height: 35rem
   html
@@ -132,17 +141,3 @@ body
           width: $height
           .row
             height: $height/2
-
-// @media only screen and (min-width: 575px)
-//   body .container
-//     .board-container .row
-//       .col
-//         &:hover
-//           &.green
-//             background-color: darken($green, 5)
-//           &.red
-//             background-color: darken($red, 5)
-//           &.yellow
-//             background-color: darken($yellow, 5)
-//           &.blue
-//             background-color: darken($blue, 5)

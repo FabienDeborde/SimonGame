@@ -5,6 +5,9 @@ $(document).ready(function() {
     playing: false,
     clickable: true,
 
+    // Store the winning condition
+    winCount: 20,
+
     // Store the count number
     count : 0,
 
@@ -95,6 +98,8 @@ $(document).ready(function() {
     addRandomColor : function() {
       // Prevent the player to click during the demo of the combination array
       game.clickable = false;
+      // Reset the playerClick counter
+      game.playerClick = 0;
       // Generate a random color
       var randomColor = game.randomColor();
       // Push the element inside the combination array
@@ -104,8 +109,6 @@ $(document).ready(function() {
       // Update the count and display it
       game.count += 1;
       game.updateCountText();
-      // Reset the playerClick counter
-      game.playerClick = 0;
     },
 
     // Play the combination
@@ -139,12 +142,27 @@ $(document).ready(function() {
       game.activeButton(className);
       // Get the corresponding element color in the combination array
       var colorButton = game.combination[game.playerClick];
+
       if (className === colorButton) { // If the player clicked the right element
         game.playerClick += 1; // add 1 to the playerClick counter (go to the next item in the combination array)
-        if ((game.combination.length) === game.playerClick) { // if it was the last item in combination array
+        if ((game.combination.length) === game.playerClick && game.count !== game.winCount ) { // if it was the last item in combination array
           setTimeout(function() { // generate a new color
             game.addRandomColor();
           }, 700);
+        } else if ((game.combination.length) === game.playerClick && game.count === game.winCount ){
+          // Winning effect (buzzer sound and color buttons flashing)
+          $('.step-container').addClass('rotate');
+          setTimeout(function () {
+            game.clickable = false;
+            game.playsound('youwin.mp3');
+            for (var i = 0; i < 20; i++) {
+              game.flashButtons( (i * 100) + 300);
+            }
+          }, 300);
+          setTimeout(function() {
+            $('.step-container').removeClass('rotate');
+            game.reset();
+          }, 3000)
         }
       } else { // If the player clicked the wrong element
         // Prevent the player to click during the demo of the combination array
