@@ -15,11 +15,11 @@ html(lang="en")
       h1.text-center Simon Game
       .board-container
         .row
-          .col.green
-          .col.red
+          .col.debug.green
+          .col.debug.red
         .row
-          .col.yellow
-          .col.blue
+          .col.debug.yellow
+          .col.debug.blue
         .controls-container.d-flex.flex-column
           .top.d-flex.justify-content-center.align-items-center.flex-column
             h4.title Count
@@ -28,7 +28,7 @@ html(lang="en")
           .bottom.d-flex
             .restart-container.d-flex.justify-content-center.align-items-center.flex-column
               .title#startButton Start
-              a(href='#').round-btn
+              a(href='#').round-btn.debug
             .strict-container.d-flex.justify-content-center.align-items-center.flex-column
               .title Strict Mode
               .switch-container.d-flex.justify-content-center.align-items-center.flex-column

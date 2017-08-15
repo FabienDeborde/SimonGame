@@ -83,7 +83,7 @@ $(document).ready(function() {
 
   $('.col').on('click', function(){
     var className = this.className;
-    className = className.replace('col ', '');
+    className = className.replace('col debug ', '');
     game.playsound(game.buttons[className].sound);
   })
 
@@ -100,6 +100,10 @@ $(document).ready(function() {
     game.playing = !game.playing;
 
 
+  })
+
+  $('.debug').on('click', function(){
+    console.log(game);
   })
 
 })
