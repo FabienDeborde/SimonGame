@@ -43,9 +43,11 @@ $(document).ready(function() {
     // Handles the game reset
     reset : function() {
       game.count = 0;
+      game.playerClick = 0;
       game.combination = [];
       game.updateStartButton('Start');
       game.updateCountText();
+      game.clickable = true;
     },
 
     // Update the Start button text
@@ -91,10 +93,10 @@ $(document).ready(function() {
 
     // Add a new color to combination
     addRandomColor : function() {
+      // Prevent the player to click during the demo of the combination array
       game.clickable = false;
       // Generate a random color
       var randomColor = game.randomColor();
-      console.log(randomColor);
       // Push the element inside the combination array
       game.combination.push(randomColor);
       // Play the combination
@@ -102,46 +104,59 @@ $(document).ready(function() {
       // Update the count and display it
       game.count += 1;
       game.updateCountText();
-      game.clickable = true;
+      // Reset the playerClick counter
+      game.playerClick = 0;
     },
 
     // Play the combination
     playCombination : function() {
+      // Store an arbitrary delay between each combination color
       var timeoutValue = 600;
       var timeout = timeoutValue;
+      // Map through the combination and activate one button at a time
       game.combination.map(function(color){
         setTimeout(function() {
           game.activeButton(color);
         }, timeout);
-        timeout += timeoutValue;
-      })
+      timeout += timeoutValue;
+      });
+      // Make the board clickable again once the demo is finished
+      setTimeout(function() {
+        game.clickable = true;
+      }, timeout);
     }
-
   }
 
+  // Button click handler
   $('.col').on('click', function(){
+    // Store the name of the color
     var className = this.className;
     className = className.replace('col debug ', '');
     if (!game.playing || !game.clickable) { // If the game has not started yet
       return null // do nothing
     } else {
-      game.playsound(game.buttons[className].sound);
-      // Get the corresponding element color
+      // Activate the button clicked (sound and color effect)
+      game.activeButton(className);
+      // Get the corresponding element color in the combination array
       var colorButton = game.combination[game.playerClick];
-      console.log(className, colorButton);
-      //console.log(colorButton);
       if (className === colorButton) { // If the player clicked the right element
-        setTimeout(function() {
-          game.addRandomColor();
-        }, 700);
-        game.playerClick += 1;
+        game.playerClick += 1; // add 1 to the playerClick counter (go to the next item in the combination array)
+        if ((game.combination.length) === game.playerClick) { // if it was the last item in combination array
+          setTimeout(function() { // generate a new color
+            game.addRandomColor();
+          }, 700);
+        }
       } else { // If the player clicked the wrong element
+        // Prevent the player to click during the demo of the combination array
+        game.clickable = false;
+        // Error effect (buzzer sound and color buttons flashing)
         setTimeout(function () {
           game.playsound('buzzer.m4a');
           for (var i = 0; i < 4; i++) {
             game.flashButtons( (i * 100) + 300);
           }
         }, 300);
+        // Show the demo again
         setTimeout(function () {
           game.playCombination();
         }, 2000);
@@ -149,10 +164,12 @@ $(document).ready(function() {
     }
   })
 
+  // Start button click handler
   $('.restart-container a').on('click', function(e){
     e.preventDefault();
     if (!game.playing) { // If not playing already
       // Start the game
+      game.clickable = false;
       game.updateStartButton('Reset');
       game.addRandomColor();
     } else {
