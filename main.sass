@@ -3,12 +3,146 @@
 
 $dark: #2c3e50
 $light: #ecf0f1
+$blue: rgba(41, 128, 185,1.0)
+$green: rgba(39, 174, 96,1.0)
+$yellow: rgba(241, 196, 15,1.0)
+$red: rgba(192, 57, 43,1.0)
+
+$height: 40rem
 
 body
+  font-family: 'Ubuntu Mono'
+  background-color: $dark
+  color: $light
 
+  .green
+    background-color: $green
+  .red
+    background-color: $red
+  .yellow
+    background-color: $yellow
+  .blue
+    background-color: $blue
+  .light
+    background-color: $light
 
-// @media only screen and (max-width: 575px)
-//   html
-//     font-size: 8px
+  .container
+    height: 100vh
+    padding-top: 50px
+    position: relative
+    h1
+      margin: 0
+    .board-container
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      height: $height
+      width: $height
+      margin: auto
+      .row
+        height: $height/2
+        margin: 0
+        .col
+          padding: 0
+          cursor: pointer
+          &.active
+            &.green
+              background-color: darken($green, 5)
+            &.red
+              background-color: darken($red, 5)
+            &.yellow
+              background-color: darken($yellow, 5)
+            &.blue
+              background-color: darken($blue, 5)
+      .controls-container
+        height: $height/2.5
+        width: $height/2.5
+        background-color: $dark
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)
+        border-radius: 2px
+        .top, .bottom
+          height: 50%
+        .top
+          .step-container
+            height: 4rem
+            width: 6rem
+            border-radius: 2px
+            .step-counter
+              height: 100%
+              font-size: 2rem
+              color: $dark
+        .bottom
+          .restart-container, .strict-container
+            height: 100%
+            width: 50%
+          .restart-container
+            .round-btn
+              margin-top: 5px
+              height: 2.5rem
+              width: 2.5rem
+              border-radius: 50%
+              background-color: $yellow
+              cursor: pointer
+              transition: all 0.1s
+              &:active
+                box-shadow: inset 0 5px 30px darken($yellow,10)
+          .strict-container
+            .switch-container
+              margin-top: 5px
+              height: 2.5rem
+              label
+                width: 3.5rem
+                height: 1.4rem
+                background-color: $light
+                cursor: pointer
+                margin: 0
+                border-radius: 15px
+                position: relative
+                &:after
+                  transition: all 200ms ease-in-out
+                  content: ''
+                  height: 1.8rem
+                  width: 1.8rem
+                  border-radius: 50%
+                  background-color: rgba(127, 140, 141,1.0)
+                  position: absolute
+                  top: 50%
+                  left: 0px
+                  transform: translateY(-50%)
 
-//@media only screen and (min-width: 575px)
+              input
+                display: none
+                &:checked +label
+                  &:after
+                    left: 3.5rem - 1.8rem
+                    background-color: rgba(231, 76, 60,1.0)
+
+@media only screen and (max-width: 575px)
+  $height: 35rem
+  html
+    font-size: 8px
+    body
+      .container
+        .board-container
+          height: $height
+          width: $height
+          .row
+            height: $height/2
+
+@media only screen and (min-width: 575px)
+  body .container
+    .board-container .row
+      .col
+        &:hover
+          &.green
+            background-color: darken($green, 5)
+          &.red
+            background-color: darken($red, 5)
+          &.yellow
+            background-color: darken($yellow, 5)
+          &.blue
+            background-color: darken($blue, 5)

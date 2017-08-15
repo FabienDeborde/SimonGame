@@ -12,7 +12,28 @@ html(lang="en")
     link(rel="stylesheet", href="main.css")
   body
     .container
-      
+      h1.text-center Simon Game
+      .board-container
+        .row
+          .col.green
+          .col.red
+        .row
+          .col.yellow
+          .col.blue
+        .controls-container.d-flex.flex-column
+          .top.d-flex.justify-content-center.align-items-center.flex-column
+            h4.title Count
+            .step-container.light
+              .step-counter.d-flex.justify-content-center.align-items-center 01
+          .bottom.d-flex
+            .restart-container.d-flex.justify-content-center.align-items-center.flex-column
+              .title Start
+              a(href='#').round-btn
+            .strict-container.d-flex.justify-content-center.align-items-center.flex-column
+              .title Strict Mode
+              .switch-container.d-flex.justify-content-center.align-items-center.flex-column
+                input(type="checkbox" id="switch")
+                label(for="switch") 
               
 
   script(src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous")
