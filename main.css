@@ -525,13 +525,3 @@ body {
       width: 35rem; }
       html body .container .board-container .row {
         height: 17.5rem; } }
-
-@media only screen and (min-width: 575px) {
-  body .container .board-container .row .col:hover.green {
-    background-color: #229955; }
-  body .container .board-container .row .col:hover.red {
-    background-color: #ab3326; }
-  body .container .board-container .row .col:hover.yellow {
-    background-color: #dab10d; }
-  body .container .board-container .row .col:hover.blue {
-    background-color: #2472a4; } }
