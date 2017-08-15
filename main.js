@@ -1,13 +1,16 @@
 $(document).ready(function() {
 
   var game = {
+    // Debug mode
+    debug: false,
+
     // Store the state of the game
     playing: false,
     clickable: true,
     strictMode: false,
 
     // Store the winning condition
-    winCount: 20,
+    winCount: 5,
 
     // Store the count number
     count : 0,
@@ -62,7 +65,7 @@ $(document).ready(function() {
     //Update the counter text
     updateCountText : function(){
       var msg = '';
-      if (game.count < 9) {
+      if (game.count < 10) {
         msg = '0' + game.count;
       } else {
         msg = game.count;
@@ -135,7 +138,10 @@ $(document).ready(function() {
   $('.col').on('click', function(){
     // Store the name of the color
     var className = this.className;
-    className = className.replace('col debug ', '');
+    className = className.replace('col', '').trim();
+    if (game.debug) {
+      className = className.replace('debug', '').trim();
+    }
     if (!game.playing || !game.clickable) { // If the game has not started yet
       return null // do nothing
     } else {
@@ -225,8 +231,13 @@ $(document).ready(function() {
   })
 
 
-  $('.debug').on('click', function(){
+  // Handle the debug mode
+  if (game.debug) {
+    $('.col').addClass('debug');
+    $('.debug').on('click', function(){
     console.log(game);
   })
+
+  }
 
 })
