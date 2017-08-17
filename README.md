@@ -10,9 +10,9 @@ Start by pushing the **Start** button, the computer will highlight a color while
 Repeat what the computer shows you, the computer will add one color each time you repeat the combination correctly.<br>
 If you fail to repeat the right combination, the computer will show it again to you.<br>
 
-You win when you find the * **20th** * combination!
+You win when you find the **_20th_** combination!
 
-##### About the Strict Mode
+#### About the Strict Mode
 When you activate the Strict Mode, if you fail to repeat the right combination, you loose the game and it resets.
 
 
