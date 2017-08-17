@@ -1,4 +1,3 @@
-
 # Simon Game
 
 (Part of [FreeCodeCamp](http://www.freecodecamp.com/) challenges)
