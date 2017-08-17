@@ -4,7 +4,7 @@
 (Part of [FreeCodeCamp](http://www.freecodecamp.com/) challenges)
 
 
-A simple [Simon Game](https://en.wikipedia.org/wiki/Simon_(game) made using Jade(Pug), Sass (with bootstrap 4), and JavaScript (with jQuery). <br>
+A simple [Simon Game](https://en.wikipedia.org/wiki/Simon_(game)) made using Jade(Pug), Sass (with bootstrap 4), and JavaScript (with jQuery). <br>
 
 Start by pushing the **Start** button, the computer will highlight a color while playing a sound. <br>
 Repeat what the computer shows you, the computer will add one color each time you repeat the combination correctly.<br>
